@@ -4,29 +4,38 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather/location.dart';
 
-class LoadingScreen extends StatelessWidget {
+class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
+
+  @override
+  State<LoadingScreen> createState() => _LoadingScreenState();
+}
+
+class _LoadingScreenState extends State<LoadingScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+
+
+    super.initState();
+  }
+  void getPosition(){
+    Location getLocation = Location();
+    getLocation.getPosition();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SpinKitDoubleBounce(
-                color: Colors.white,
-                size: 100.0,
-              ),
-              TextButton(
-                  onPressed: () async{
-                    Location getCurrentLocation = Location();
-                    getCurrentLocation.getPosition();
-                  },
-                  child: Text("Get location")
-              )
-            ],
-          ),
+        child: SpinKitDoubleBounce(
+          color: Colors.white,
+          size: 100.0,
+        ),
       ),
     );
   }
