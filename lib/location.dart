@@ -7,16 +7,19 @@ class Location{
   var latitud;
   var longitud;
 
-  Future<void> getPosition() async{
+  Future<void> getPosition() async {
     try {
       LocationPermission permission = await Geolocator.requestPermission();
-      Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
-      print('Latitud: ${position.latitude}, Longitud ${position.longitude}');
-    }
-    catch (error){
+
+      if (permission == LocationPermission.always || permission == LocationPermission.whileInUse) {
+        Position position = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.low);
+        latitud = position.latitude;
+        longitud = position.longitude;
+        print('Latitud: ${position.latitude}, Longitud ${position.longitude}');
+      }
+    } catch (error) {
       print(error);
     }
-
   }
-
 }
